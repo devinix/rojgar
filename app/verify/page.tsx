@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Lock } from 'lucide-react';
 
-export default function VerifyPage() {
+function VerifyContent() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const phone = searchParams.get('phone') || '93785285928';
@@ -79,5 +79,13 @@ export default function VerifyPage() {
                 </motion.div>
             </div>
         </div>
+    );
+}
+
+export default function VerifyPage() {
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <VerifyContent />
+        </Suspense>
     );
 }
